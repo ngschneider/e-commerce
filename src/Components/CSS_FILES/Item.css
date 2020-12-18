@@ -1,0 +1,13 @@
+.ant-carousel .slick-slide {
+    height : 100%;
+    line-height: 500%;
+    padding: 10px;
+    background: #364d79;
+    overflow: hidden;
+
+  }
+
+
+  .ant-carousel .slick-slide h3 {
+    color: #fff;
+  }
