@@ -1,0 +1,367 @@
+Routes Requirements
+Requirements will change throughout the development process.
+
+
+******************************************************************************
+BUGS
+******************************************************************************
+
+BUGS HERE
+
+******************************************************************************
+END OF BUGS
+******************************************************************************
+
+##############################################################################
+ROUTES
+##############################################################################
+/Login:input
+	INPUT
+        {
+            credentials:true
+            username:”NolanSchneiderIsBOSS”
+        }
+    OUTPUT
+        {
+            correctCredentials: true
+            username: ‘This is a username”
+        }
+    Notes
+        Should check to make sure that the email/user and password is valid and 
+
+##############################################################################
+/Signup:input
+ 	INPUT
+        {
+            Email: “”
+            Username: “”
+            Password: “”
+            Address:  “”
+            …..
+        }
+    OUTPUT
+        {
+            sucessSignup: true
+        }
+    Notes  
+        Should check to see if credentials already exist
+
+##############################################################################
+/Sell:input
+    INPUT
+		{
+			username:”nolanIsGod”
+        }
+                                           	 
+ 	OUTPUT
+		{
+                          CurrentItem: [
+                              {
+                                     Ñame:tv
+                                      Pic:item.js
+                                      Uniqueid:28kdjend
+                               },
+                                {
+                                     Ñame:tv
+                                      Pic:item.js
+                                      Uniqueid:28kdjend
+                               }
+
+                            ],
+                           SoldItems:[
+                                {
+                                     Ñame:tv
+                                      Pic:item.js
+                                      Uniqueid:28kdjend
+                               }
+
+
+                                    ]
+}
+    Notes 
+        Should return 2 arrays currentItems and sold items 
+
+##############################################################################
+/Add:input
+    INPUT
+	        {
+			username:jjen
+			itemName:Television,
+			price:500.00,
+			Images:
+            [
+                {pic:telePic1.png},
+                {pic:telePic2.png},
+                {pic:telePic3..jpg},
+
+            ],
+			miniDescription:
+            [
+                {listItem:70 inch tv},
+                {listItem:4k resolution },
+                {listItem:Smart TV}
+            ],
+            description:THIS IS A VERY LONG DESCRIPTION
+			specialDisplay:
+				[
+					{
+						inputType:number
+						name:Quantity
+						Rangelow:0
+						RangeHigh:10
+                    },
+                    {
+						inputType:textbox
+						name:Size
+						Sizes: [
+							{XS},
+							{S},
+							{M},
+							{L},
+							{XL}
+                        ]
+                    }
+                ]
+            }
+
+                                           	 
+ 	OUTPUT
+             Add item to the users store
+		Example
+		{
+                              Addeditem:true
+}
+##############################################################################
+7/Cart:input
+	INPUT
+		Example 
+			{
+				username:NOLAN
+}
+	OUTPUT
+		Should Retrieve any items in the cart of the given username”
+		Each item will a javascript object in an array
+		Example 
+			{
+				data:  [
+					{
+						name:Television
+						Quantity:10
+						Price:500.00
+						subtotal:”5000.00”
+						
+},
+					{
+						name:Bike
+						Quantity:1
+						Price:500.00
+						Subtotal:”500.00”
+},
+					{
+						Name:how to code book
+						Quantity:1
+						Price:25.00
+						subtotal:”25.00”
+}
+],
+total:5525.00
+
+                                                                         ##############################################################################
+6. /Item:input
+INPUT
+	Example
+		{
+			itemUniqueId:asdfnl4kj3j4
+}
+                                           	 
+ 	OUTPUT
+	Should retrieve a singular item given a item  unique id
+		Example
+		{
+			itemName:Television,
+			price:500.00,
+			Images:
+[
+{pic:telePic1.png},
+{pic:telePic2.png},
+{pic:telePic3..jpg},
+
+].
+			miniDescription:
+ [
+	{mess:70 inch tv},
+	{mess:4k resolution },
+	{mess:Smart TV}
+],
+description:THIS IS A VERY LONG DESCRIPTION
+			specialDisplay:
+				[
+					{
+						inputType:number
+						name:Quantity
+						Rangelow:0
+						RangeHigh:10
+},
+{
+						inputType:textbox
+						name:Size
+						Sizes: [
+							{XS},
+							{S},
+							{M},
+							{L},
+							{XL}
+]
+}
+]
+
+}
+##############################################################################
+5./MiniItem:input
+INPUT
+	Input is an array of unique ID’s. 
+	Example
+		{
+			miniItems:
+[
+					{itemUniqueID:sd23fgs344},
+{itemUniqueID:wretwertw},
+{itemUniqueID:asqwerq1234},
+]
+}
+                                           	 
+ 	OUTPUT
+		Should retrieve a array of items given the item  unique ids
+		Example
+		{
+			miniItems:
+				[
+				{
+			name:Television,
+			Pic:item.jpg,
+Itemuniquid:333ddddd
+		},
+{
+			name:mac,
+			Pic:item.jpg,
+Itemuniquid:333ddddd
+		},
+{
+			name:bed,
+			Pic:item.jpg,
+Itemuniquid:333ddddd
+		}
+]
+}
+##############################################################################
+10. /Search:input-
+INPUT
+	Example
+		{
+			search:T-Shirt-Green
+}
+                                           	 
+ 	OUTPUT
+		Array of of items, that are relevant to the search
+		Example
+		{
+			miniItems:
+				[
+				{
+			name:Television,
+			Pic:item.jpg,
+Itemuniquid:333ddddd
+		},
+{
+			name:mac,
+			Pic:item.jpg,
+Itemuniquid:333ddddd
+		},
+{
+			name:bed,
+			Pic:item.jpg,
+Itemuniquid:333ddddd
+		}
+]
+}
+
+#############################################################################
+8. /ChangePassword:input-done
+INPUT
+	Example
+		{
+			username:nolan123,
+			currentPassword:fish123
+			newPassword:fishnewpass123
+}
+                                           	 
+ 	OUTPUT
+		Change the password to newPassword if user and current password match the database
+		Example
+		{
+			changedPass:true
+}
+##################################
+8. /previousOrders:input-Done
+INPUT
+	Example
+		{
+			username:NOLAN23432
+}
+                                           	 
+ 	OUTPUT
+		Return the same as the “miniItem” route but look at previous orders by the given username
+		Example
+		
+              		{
+			miniItems:
+				[
+				{
+			name:Television,
+			Pic:item.jpg,
+Itemuniquid:333ddddd
+		},
+{
+			name:mac,
+			Pic:item.jpg,
+Itemuniquid:333ddddd
+		},
+{
+			name:bed,
+			Pic:item.jpg,
+Itemuniquid:333ddddd
+		}
+]
+}
+
+
+
+##############################################################################
+9. /AddCreditCard:input
+INPUT
+	Example
+		{
+			username:nolan345
+}
+                                           	 
+ 	OUTPUT
+ Return same as 
+		Example
+		{
+
+}
+##############################################################################
+10. /GetCrediCards:input
+INPUT
+	Example
+		{
+			username:NOLAN23432
+}
+                                           	 
+ 	OUTPUT
+		Return all credit cards from the username 
+		Example
+		{
+
+}
+
