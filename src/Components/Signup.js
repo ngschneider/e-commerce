@@ -28,8 +28,8 @@ class Signup extends React.Component {
     }
 
     loginFetch(SIGNUP_INFOMATION){
-        let mysqlServer="http://ec2-3-16-215-130.us-east-2.compute.amazonaws.com:8081";
-        let serverRoute="/Signup:";
+        let mysqlServer="http://35.224.238.169:444";
+        let serverRoute="/addUser";
         console.log(SIGNUP_INFOMATION)
         fetch( mysqlServer + serverRoute + "" +JSON.stringify(SIGNUP_INFOMATION) + "" )
         .then(res => res.json())
@@ -45,7 +45,7 @@ class Signup extends React.Component {
           },
           (error) => {
            this.connectedToServer(false);
-            console.log("FAILED TO CONNECT TO SERVER");
+            console.log("FAILED TO CONNECT TO SERVER: " + error);
 
           }
         )
@@ -72,7 +72,8 @@ class Signup extends React.Component {
         //console.log("Values recieved from Signup.form \n"  + values.Name + "\n" + values.Email );
 
         let SIGNUP_INFOMATION = {
-            name: values.Name,
+            firstname: values.Name,
+            lastname: values.Name,
             email: values.Email,
             username: values.Username,
             password: values.password,
