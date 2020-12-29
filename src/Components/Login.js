@@ -2,7 +2,7 @@ import React from 'react';
 import "antd/dist/antd.css";
 import { Form, Input, Button, Checkbox, Divider} from 'antd';
 import {Redirect} from "react-router-dom";
-import fetchServer from "./fetchServer";
+import FetchServer from "./FetchServer";
 
 class Login extends React.Component{
   constructor(props){

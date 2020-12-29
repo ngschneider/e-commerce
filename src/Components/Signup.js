@@ -1,6 +1,7 @@
 import React from "react";
 import { Form, Input, InputNumber, Divider, Button } from "antd";
 import {Redirect} from 'react-router-dom';
+import FetchServer from "./FetchServer"
 
 const layout = {
   labelCol: { span: 8 },
@@ -23,38 +24,28 @@ class Signup extends React.Component {
         super(props);
         this.state = {
             signup:false,
-            responce:null
+            response:null
         }
     }
-
-    loginFetch(SIGNUP_INFOMATION){
-        let mysqlServer="http://35.224.238.169:444";
-        let serverRoute="/addUser";
-        console.log(SIGNUP_INFOMATION)
-        fetch( mysqlServer + serverRoute + "" +JSON.stringify(SIGNUP_INFOMATION) + "" )
-        .then(res => res.json())
-        .then(
-          (result) => {
-              console.log("Reponce -> " + result)
+    loginFetch(information){
+        let getInfo = new FetchServer();
+        getInfo.fetchRouteServer("/addUser",information,function(result,connected){
+            console.log(`Success! => ${JSON.stringify(result)}`);
             this.setState({
-                responce:result
+                response:result
             });
-            this.connectedToServer(true);
-            console.log("CONNECTTED TO SERVER");
-      
-          },
-          (error) => {
-           this.connectedToServer(false);
-            console.log("FAILED TO CONNECT TO SERVER: " + error);
+            this.connectedToServer(connected)
 
-          }
-        )
-      }
+        });
+
+    }
+    
     connectedToServer(connected){
         if(connected){
             //CONNECTED TO SERVER
-            console.log(this.state.responce)
-            if(this.state.responce ){
+            console.log(this.state.response.signup)
+            if(this.state.response.signup == "true"){
+                console.log("correct login credentials");
                 this.setState(
                     {
                         signup:true
@@ -62,11 +53,15 @@ class Signup extends React.Component {
                 );
             }else{
                 // Connected TO SERVER, BUT DID NOT SUCESSFULL SIGNUP
+                console.log("Incorrect login credentials");
             }
         }else{
             // DID NOT CONNECT TO SERVER
+            console.log("Failed to connect to server");
+
         }
     }
+
     onFinish = (values) => {
 
         //console.log("Values recieved from Signup.form \n"  + values.Name + "\n" + values.Email );
@@ -79,9 +74,7 @@ class Signup extends React.Component {
             password: values.password,
             address: values.Address,
         }
-
         this.loginFetch(SIGNUP_INFOMATION);
-
     }
     onFinishFailed = (errorInfo) => {
 
@@ -99,7 +92,7 @@ class Signup extends React.Component {
 
                     <Form {...layout } onFinish={this.onFinish} onFinishFailed={this.onFinishFailed}>
 
-                        <Form.Item label="Name" name="Name"rules={[{ reqauired: true }]} >
+                        <Form.Item label="Name" name="Name"rules={[{ required: true }]} >
                             <Input />
                         </Form.Item>
 
@@ -122,7 +115,7 @@ class Signup extends React.Component {
                                 return Promise.resolve();
                                 }
                                 return Promise.reject(
-                                "The two passwords that you entered do not match!"
+                                "The passwords that you entered do not match!"
                                 );
                             },
                             }),
