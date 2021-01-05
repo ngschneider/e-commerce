@@ -1,4 +1,6 @@
-
+/*
+* Connect to web server
+*/
 class FetchServer {
     constructor(){}
     response = {
@@ -8,12 +10,12 @@ class FetchServer {
    }
     fetchRouteServer(ROUTE,DATA_SEND,callback){
     // DATA_SEND SHOULD BE JSON
-    let test = true;
       let mysqlServer="http://35.224.238.169:444";
     fetch( mysqlServer + ROUTE + "" +  JSON.stringify(DATA_SEND) + "" )
     .then(res => res.json())
     .then(
       (serverResponse) => {
+
         console.log("===== Connected to " + ROUTE + "=====");
         console.log("Data Sent : " + JSON.stringify(DATA_SEND) )
         console.log("Data Received : " + JSON.stringify(serverResponse) )
@@ -23,7 +25,6 @@ class FetchServer {
 
       },
       (error) => {
-        
 
         //this.connectedToServer(false)
         console.log("===== Failed to connected to server =====");
@@ -34,9 +35,6 @@ class FetchServer {
     }
     )
    
-   // console.log(" d " + this.response.connected)
-    
-
   }
 
    updateResponse(connected,response){

@@ -16,7 +16,7 @@ class Login extends React.Component{
     };
   }
 
-// ********************************** //
+// **************Layout******************** //
   layout = {
   labelCol: {
     span: 4,
@@ -34,7 +34,6 @@ class Login extends React.Component{
 };
 // ********************************** //
 
-
 printStateValues(){
   console.log("********STATE VALUES FROM:  Login.JS********");
   console.log("* isLogin  == " + this.state.isLogin + "  *" );
@@ -50,6 +49,14 @@ correctCredentials(credentialResponce){
       username: this.state.responce
     })
   }
+}
+loginFetch2(LOGIN_INFORMATION){
+  let getInfo = new FetchServer();
+  let route = "/Login";
+  getInfo.fetchRouteServer(route,LOGIN_INFORMATION,function(results,connected){
+    console.log(results)
+  });
+
 }
 
 loginFetch(LOGIN_INFORMATION){
@@ -105,31 +112,37 @@ loginFetch(LOGIN_INFORMATION){
 
           //DO SOMETHING HERE IF DIDNT CONNECT TO SERVER
     }
-    
-      
-  
 
   }
 
  onFinishFailed = errorInfo => {
-
   console.log('Login.js -> Form error: ', errorInfo);
 
 };
 
 onFinish = values => {
-
    let response = this.loginFetch({user: values.username, pass: values.password} );
     //this.connectedToServer(this.state.response.result);
 
 };
+
   render() {
     //this.printStateValues();
 
     if(!this.state.isLogin){ 
+      return this.loginRender();
 
-      return (
-        <div>
+    } else if(this.state.isLogin){
+      return this.rerouteLogin();
+    }
+    return (
+      <h1> REPORT THIS IF YOU SEE THIS </h1>
+    )
+  }
+
+  loginRender(){
+    return (
+      <div>
         <Divider orientation="left" style={{ color: "#333", fontWeight: "normal" }}>
             Log In
           </Divider>  
@@ -153,21 +166,16 @@ onFinish = values => {
           </Form.Item>
         </Form>
         </div>
-      );
-    } else if(this.state.isLogin){
-      let routePath = "/Home" + "/recommended/" + this.state.response;
-        return (
-          <div>
-            <h1>test</h1>
-            
-          <Redirect to={routePath}/>
-          </div>
-        );
-
-    }
+    );
+  }
+  rerouteLogin(){
+    let routePath = "/Home" + "/recommended/" + this.state.response;
     return (
-      <h1> REPORT THIS IF YOU SEE THIS </h1>
-    )
+      <div>
+        <h1>test</h1>
+        <Redirect to={routePath}/>
+      </div>
+    );
   }
 }
 export default Login;
