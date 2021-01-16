@@ -1,7 +1,7 @@
 import React from "react";
 import { Form, Input, InputNumber, Divider, Button } from "antd";
 import {Redirect} from 'react-router-dom';
-import FetchServer from "./FetchServer"
+import FetchServer from "./FetchServer";
 
 const layout = {
   labelCol: { span: 8 },
@@ -27,28 +27,25 @@ class Signup extends React.Component {
             response:null
         }
     }
-    loginFetch(information){
+    loginFetch = (information) => {
         let getInfo = new FetchServer();
-        getInfo.fetchRouteServer("/addUser",information,function(result,connected){
+        getInfo.fetchRouteServer("/addUser",information,(result,connected) => {
             console.log(`Success! => ${JSON.stringify(result)}`);
-            // Broken, Bind state or create promise, or create function for this to be executed
-            this.setState({
-                response:result
-            });
-            this.connectedToServer(connected)
-
+ 
+              this.connectedToServer(connected,result);
         });
 
     }
     
-    connectedToServer(connected){
+   connectedToServer = (connected,result) =>{
+        console.log("test")
         if(connected){
             //CONNECTED TO SERVER
-            console.log(this.state.response.signup)
-            if(this.state.response.signup == "true"){
+            if(result.signup == "true"){
                 console.log("Account Successfully Created");
                 this.setState(
                     {
+                        response:result,
                         signup:true
                     }
                 );
@@ -95,7 +92,7 @@ class Signup extends React.Component {
 
   }
   
-  signupRender() {
+  signupRender = () => {
     return (
         <div>
 
