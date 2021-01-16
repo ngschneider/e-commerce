@@ -50,7 +50,7 @@ correctCredentials(credentialResponce){
     })
   }
 }
-loginFetch2(LOGIN_INFORMATION){
+loginFetch(LOGIN_INFORMATION){
   let getInfo = new FetchServer();
   let route = "/Login";
   getInfo.fetchRouteServer(route,LOGIN_INFORMATION,function(results,connected){
@@ -59,29 +59,6 @@ loginFetch2(LOGIN_INFORMATION){
 
 }
 
-loginFetch(LOGIN_INFORMATION){
-  //console.log(LOGIN_INFORMATION);
- // console.log(JSON.stringify(LOGIN_INFORMATION));
-  let mysqlServer="http://ec2-3-16-215-130.us-east-2.compute.amazonaws.com:8081";
-  let serverRoute="/Login:";
-  fetch( mysqlServer + serverRoute + "" +  JSON.stringify(LOGIN_INFORMATION) + "" )
-  .then(res => res.json())
-  .then(
-    (result) => {
-      console.log("RESPONCE FROM SERVER : " + result.username);
-      this.setState({
-        response :result.username
-      })
-      console.log("login.loginFetch -> CONNECTTED TO SERVER");
-      this.connectedToServer(result);
-    },
-    (error) => {
-     
-      this.connectedToServer(false)
-      console.log("FAILED TO CONNECT TO SERVER");
-    }
-  )
-}
 
   connectedToServer(response){      
     console.log("response   " + response.credentials)
