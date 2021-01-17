@@ -20,7 +20,7 @@ class FetchServer {
         console.log("Data Sent : " + JSON.stringify(DATA_SEND) )
         console.log("Data Received : " + JSON.stringify(serverResponse) )
         console.log("=====================================")
-       this.updateResponse(true,serverResponse);
+       //this.updateResponse(true,serverResponse);
        callback(serverResponse,true);
 
       },
@@ -30,7 +30,7 @@ class FetchServer {
         console.log("===== Failed to connected to server =====");
         console.log("Error received : " + error);
         console.log("===============================")
-        this.updateResponse(false,error);
+        //this.updateResponse(false,error);
         callback(error,false);
     }
     )

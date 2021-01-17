@@ -44,7 +44,7 @@ class AddItem extends React.Component {
     });
   }
   addItemFetch(ADD_ITEM_ORDER){
-    let mysqlServer="http://ec2-3-16-215-130.us-east-2.compute.amazonaws.com:8081";
+    let mysqlServer="http://35.224.238.169:444";
     let serverRoute="/AddItem:";
     console.log(ADD_ITEM_ORDER)
     fetch( mysqlServer + serverRoute + "" +JSON.stringify(ADD_ITEM_ORDER) + "" )
@@ -125,7 +125,7 @@ connectedToServer(connected){
     console.log("filelist keys " + Object.keys(info["fileList"]))
     let fileList = info["fileList"].map(file => {
       if (file.response) {
-        //console.log(file)
+        console.log(file.response.url)
         // Component will show file.url as link
         file.url = file.response.url;
 
@@ -279,8 +279,9 @@ let numberInput = (
                 rules={[{ required: true }]}
               >
               <div className="clearfix">
+              {console.log(fileList)}
                 <Upload 
-                  action="http://ec2-3-16-215-130.us-east-2.compute.amazonaws.com:8081/AddPic:"
+                  action="http://35.224.238.169:444/img"
                   listType="picture-card"
                   fileList={fileList}
                   onPreview={this.handlePreview}

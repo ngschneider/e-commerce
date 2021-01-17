@@ -8,7 +8,7 @@ class Login extends React.Component{
   constructor(props){
     super(props);
     this.state = {
-      responcs: null,
+      response: null,
       error: null,
       isLogin: false,
       username: "Not-Logged-In",
@@ -42,38 +42,39 @@ printStateValues(){
   console.log("********************************************");
 }
 
-correctCredentials(credentialResponce){
-  if(credentialResponce){
+correctCredentials(credentialResponse){
+  if(credentialResponse){
     this.setState({
       isLogin: true,
-      username: this.state.responce
+      username: this.state.response.username
     })
   }
 }
-loginFetch(LOGIN_INFORMATION){
+
+loginFetch = (LOGIN_INFORMATION) => {
   let getInfo = new FetchServer();
   let route = "/Login";
-  getInfo.fetchRouteServer(route,LOGIN_INFORMATION,function(results,connected){
+  getInfo.fetchRouteServer(route,LOGIN_INFORMATION,(results,connected) => {
     console.log(results)
+    this.connectedToServer(results)
   });
 
 }
 
 
   connectedToServer(response){      
-    console.log("response   " + response.credentials)
+    console.log("response   " + response.username)
       if(response){
-
         this.setState({
-          responce: response.result,
+          response: response,
           success: true
         });
-        console.log(response.credentials)
-        this.correctCredentials(response.credentials);
+        console.log(this.state.response.username)
+        this.correctCredentials(response.signin);
 
         if(this.state.isLogin){ // Login Route responded sucessfully
 
-          console.log("Login was as, username: " + this.state.response);
+          console.log("Login was as, username: " + this.state.username);
           
 
         } else if(!this.state.isLogin) {
@@ -146,7 +147,7 @@ onFinish = values => {
     );
   }
   rerouteLogin(){
-    let routePath = "/Home" + "/recommended/" + this.state.response;
+    let routePath = "/Home" + "/recommended/" + this.state.username;
     return (
       <div>
         <h1>test</h1>
