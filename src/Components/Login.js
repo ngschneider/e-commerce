@@ -2,17 +2,17 @@ import React from 'react';
 import "antd/dist/antd.css";
 import { Form, Input, Button, Checkbox, Divider} from 'antd';
 import {Redirect} from "react-router-dom";
-import FetchServer from "./FetchServer";
+import FetchServer from "./Fetching/FetchServer";
 
 class Login extends React.Component{
   constructor(props){
     super(props);
     this.state = {
-      response: null,
-      error: null,
-      isLogin: false,
+      responseReceived: null, // Response from the server.
+      errorReceived: null,    // Error Response from the server.
+      loginSucessfull: false, // Login has sucessfully signed in ?
       username: "Not-Logged-In",
-      success: false,
+      fetchedServer: false, // Response from receviced ? 
     };
   }
 
@@ -43,11 +43,23 @@ printStateValues(){
 }
 
 correctCredentials(credentialResponse){
-  if(credentialResponse){
+
+
+  if(credentialResponse === "true"){
+    console.log("asdfasdfasdf" + credentialResponse);
+
     this.setState({
-      isLogin: true,
-      username: this.state.response.username
+      loginSucessfull: true,
+      username: this.state.responseReceived.username
     })
+  }else{
+    console.log("asdfasdfasdf" + credentialResponse);
+
+    this.setState({
+      
+      loginSucessfull: false,
+      username: this.state.responseReceived.username
+    });
   }
 }
 
@@ -63,26 +75,27 @@ loginFetch = (LOGIN_INFORMATION) => {
 
 
   connectedToServer(response){      
-    console.log("response   " + response.username)
+    // console.log("response   " + response.username)
       if(response){
         this.setState({
-          response: response,
-          success: true
+          responseReceived: response,
+          fetchedServer: true
         });
-        console.log(this.state.response.username)
+
+        console.log(this.state.responseReceived.username)
+        console.log(response.signin);
+
         this.correctCredentials(response.signin);
 
-        if(this.state.isLogin){ // Login Route responded sucessfully
+        console.log(this.state.loginSucessfull);
 
-          console.log("Login was as, username: " + this.state.username);
+        if(this.state.loginSucessfull){ // Login Route responded sucessfully
+
+          console.log("Login as, username: " + this.state.username);
           
 
-        } else if(!this.state.isLogin) {
-          this.setState({
-            isLogin: false,
-            success: false,
-            error:response.error
-          });
+        } else if(!this.state.loginSucessfull) {
+
           console.log("Credentials are wrong!!!!!");
   
         }
@@ -107,10 +120,10 @@ onFinish = values => {
   render() {
     //this.printStateValues();
 
-    if(!this.state.isLogin){ 
+    if(!this.state.loginSucessfull){ 
       return this.loginRender();
 
-    } else if(this.state.isLogin){
+    } else if(this.state.loginSucessfull){
       return this.rerouteLogin();
     }
     return (

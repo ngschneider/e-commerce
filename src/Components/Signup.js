@@ -1,7 +1,7 @@
 import React from "react";
 import { Form, Input, InputNumber, Divider, Button } from "antd";
 import {Redirect} from 'react-router-dom';
-import FetchServer from "./FetchServer";
+import FetchServer from "./Fetching/FetchServer";
 
 const layout = {
   labelCol: { span: 8 },
