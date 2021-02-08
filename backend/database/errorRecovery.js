@@ -11,7 +11,7 @@
 
 const errorRecovery = (err) => {
 	
-	if(!err.hasOwnProperty('message')){ // Determines if their is an error.
+	if(! err?.message){ // Determines if their is an error.
 	//	console.log(err);
 		err.errnum = 1;
 		return err;
@@ -37,8 +37,10 @@ const errorRecovery = (err) => {
 }
 
 function errorRegex(message){
+	console.log(message);
 	let regex = /(.*):.*/;
 	let res = message.match(regex);
+	console.log(res);
 	return res[1];
 }
 

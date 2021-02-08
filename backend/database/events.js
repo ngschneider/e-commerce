@@ -3,9 +3,9 @@ exports.select = (sql_statement, cb) => {
 var responce = [];
 var con = mysql.createConnection(
         {
-                host: "72.213.18.158",
+                host: "192.168.0.100",
                 user: "adminremote",
-                password: "Remote12681@5",
+                password: "Mtndewmadness1@",
                 database: "ecommerce",
                 stringifyObjects: "true",
 		multipleStatements: "true"
