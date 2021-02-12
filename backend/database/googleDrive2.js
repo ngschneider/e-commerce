@@ -2,7 +2,7 @@ const {JWT} = require('google-auth-library');
 const keys = require('./credentials.json');
 
 async function main() {
-
+  console.log(keys.client_email);
   const client = new JWT({
     email: keys.client_email,
     key: keys.private_key,
@@ -12,7 +12,7 @@ async function main() {
   const url = `https://dns.googleapis.com/dns/v1/projects/${keys.project_id}`;
   const res = await client.request({url});
 
-  console.log(res.data);
+  console.log("response : \n" + res.data);
 }
 
 main().catch(console.error);

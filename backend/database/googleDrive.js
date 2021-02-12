@@ -1,26 +1,19 @@
-const {google} = require('googleapis');
-var googleAuth = require('google-auth-library');
+const Cloud = require('@google-cloud/storage');
+const path = require('path');
 
-const auth1 = new google.auth.GoogleAuth({
-    keyFile: './credentials.json',
-    scopes: ['https://www.googleapis.com/auth/cloud-platform'],
-  });
-const drive = google.drive({
-    version: 'v3',
-    auth: auth1
-  });
-  async function start() {
-    const res = await drive.files.create({
-        requestBody: {
-        name: 'Test',
-        mimeType: 'text/plain'
-        },
-        media: {
-        mimeType: 'text/plain',
-        body: 'Hello World'
-        }
-    });
-}
+const serviceKey = path.join(__dirname, './cloud-storage.key.json');
 
+const { Storage } = Cloud;
 
-start();
+const storage = new Storage({
+  keyFilename: serviceKey,
+  projectId: 'iron-wave-294200',
+});
+
+(async () => {
+    let bucket = storage.bucket("exitium-files");
+    let b = bucket.file("test").save("asdf");
+    
+    console.log("asdf");
+})();
+
