@@ -6,7 +6,7 @@ async function main() {
   const client = new JWT({
     email: keys.client_email,
     key: keys.private_key,
-    scopes: ['https://www.googleapis.com/auth/drive'],
+    scopes: ['https://www.googleapis.com/auth/'],
   });
 
   const url = `https://dns.googleapis.com/dns/v1/projects/${keys.project_id}`;

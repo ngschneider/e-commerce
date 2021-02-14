@@ -10,10 +10,14 @@ const storage = new Storage({
   projectId: 'iron-wave-294200',
 });
 
-(async () => {
+const upload = (async (fileData,fileName) => {
     let bucket = storage.bucket("exitium-files");
-    let b = bucket.file("test").save("asdf");
+    let b = bucket.file(fileName).save(fileData);
     
     console.log("asdf");
-})();
+});
 
+const retriveURL = 1;
+
+exports.upload = upload;
+exports.retriveURL = retriveURL;

@@ -18,7 +18,7 @@ const errorRecovery = (err) => {
 		
 	}else {
 		console.log("ErrorRecovery : " + err.message)
-		let errorString = "" + err.message+ "";
+		let errorString = "" + err.message + "";
 		let errorType = errorRegex(err.message);
 
 		console.log(`message + ${errorType}`);	
