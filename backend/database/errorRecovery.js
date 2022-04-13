@@ -10,8 +10,10 @@
  */
 
 const errorRecovery = (err) => {
+	console.log(err.hasOwnProperty('message'));
+	if(//! err?.message
 	
-	if(! err?.message){ // Determines if their is an error.
+				!err.hasOwnProperty('message')){ // Determines if their is an error.
 	//	console.log(err);
 		err.errnum = 1;
 		return err;

@@ -3,12 +3,12 @@ exports.select = (sql_statement, cb) => {
 var responce = [];
 var con = mysql.createConnection(
         {
-                host: "192.168.0.100",
-                user: "adminremote",
-                password: "Mtndewmadness1@",
+                host: "34.136.93.222",
+                user: "REMOTEUSER",
+                password: "remotePass1",
                 database: "ecommerce",
                 stringifyObjects: "true",
-		multipleStatements: "true"
+				multipleStatements: "true"
         }
 
 );

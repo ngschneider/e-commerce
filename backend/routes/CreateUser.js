@@ -12,7 +12,8 @@
 		let date = generateDate();
 
 		let user = addUser.addUser(uniqueId, input.username, date);
-		let userCred = userCredentials.userCredentials(uniqueId, input.email, input.username, input.password);	       let userInfo = UserInformation.userInformation(uniqueId, input.firstname, input.lastname);
+		let userCred = userCredentials.userCredentials(uniqueId, input.email, input.username, input.password);	      
+		let userInfo = UserInformation.userInformation(uniqueId, input.firstname, input.lastname);
 		let commandList = [user, userCred, userInfo];
 		sqlCommands.send(commandList, function(result){
 			let jsonResponse = response(result.errnum, input, uniqueId);

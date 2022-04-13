@@ -9,12 +9,14 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@google-cloud/storage": "^5.19.0",
     "cors": "^2.8.5",
     "express": "^4.17.1",
     "express-fileupload": "^1.2.1",
     "google-auth-library": "^3.1.2",
     "googleapis": "^39.2.0",
     "jquery-file-upload-middleware": "^0.1.8",
+    "latest": "^0.2.0",
     "mysql": "^2.18.1",
     "nvm": "0.0.4"
   }

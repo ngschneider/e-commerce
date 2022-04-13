@@ -2,7 +2,7 @@
 const sqlCommand = require("../database/sqlCommand");
 
 const getUser = (username) => {
-	let tableName = "Users";
+	let tableName = "user";
 	let columnName = "username";
 	let userSelect = sqlCommand.select(tableName, columnName, username);
 	

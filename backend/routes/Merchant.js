@@ -53,7 +53,7 @@ const IsMerchant = (username, cb) => {
 	console.log(command);
 	sqlCommand.send([command], (result) => {
 		console.log(result);
-		if(result[0]?.id){
+		if(result[0].id){ // ? error
 			let userid = result[0].id;
 			 getMerchantId(userid, (response) => {
 				if(response[0].merchantId){

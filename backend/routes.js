@@ -14,6 +14,8 @@ const Product = require('./routes/product');
 // Routes
 
 	router.get('/addUser:input', (req,res) => {
+
+			console.log(req.params.input)
        		CreateUser.createUser(req.params.input,function(result){
 			res.send(`${result}`)
 		});
